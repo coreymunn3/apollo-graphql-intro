@@ -1,5 +1,4 @@
 const { ApolloServer, gql } = require('apollo-server');
-const { mainCards, products } = require('./db');
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
 
@@ -17,7 +16,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    products: [Product]
+    products: [Product]!
     product(slug: String!): Product
   }
 
@@ -37,9 +36,13 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    products: () => products,
-    product: (parent, args, context) => {
-      return products.find((p) => p.slug === args.slug);
+    products: async () => {
+      const products = await Product.find();
+      return products;
+    },
+    product: async (parent, { slug }, context) => {
+      const product = await Product.findOne({ slug });
+      return product;
     },
   },
   Mutation: {
@@ -57,7 +60,7 @@ const resolvers = {
         stock,
         onSale,
       });
-      console.log(product);
+      // console.log(product);
       await product.save();
       return product;
     },
@@ -81,3 +84,6 @@ const startServer = async () => {
 };
 
 startServer();
+
+// quick start guide mongoose with graphql
+// https://www.youtube.com/watch?v=YFkJGEefgU8
