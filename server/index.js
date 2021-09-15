@@ -1,12 +1,12 @@
 const { ApolloServer, gql } = require('apollo-server');
 const mongoose = require('mongoose');
-const Product = require('./models/Product');
+const { Product, Category } = require('./models');
 
 const typeDefs = gql`
   type Product {
     id: ID!
     name: String!
-    slug: String
+    slug: String!
     image: String
     rating: Float
     price: Float
@@ -15,9 +15,17 @@ const typeDefs = gql`
     onSale: Boolean
   }
 
+  type Category {
+    id: ID!
+    image: String!
+    categoryName: String!
+    slug: String!
+  }
+
   type Query {
-    products: [Product]!
+    products: [Product!]!
     product(slug: String!): Product
+    categories: [Category!]!
   }
 
   type Mutation {
@@ -31,6 +39,12 @@ const typeDefs = gql`
       stock: Int
       onSale: Boolean
     ): Product!
+
+    createCategory(
+      image: String!
+      categoryName: String!
+      slug: String!
+    ): Category!
   }
 `;
 
@@ -43,6 +57,10 @@ const resolvers = {
     product: async (parent, { slug }, context) => {
       const product = await Product.findOne({ slug });
       return product;
+    },
+    categories: async () => {
+      const categories = await Category.find();
+      return categories;
     },
   },
   Mutation: {
@@ -63,6 +81,11 @@ const resolvers = {
       // console.log(product);
       await product.save();
       return product;
+    },
+    createCategory: async (_, { image, categoryName, slug }) => {
+      const category = new Category({ image, categoryName, slug });
+      await category.save();
+      return category;
     },
   },
 };
