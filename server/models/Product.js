@@ -9,6 +9,10 @@ const Product = new mongoose.Schema({
   description: [String],
   stock: Number,
   onSale: Boolean,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+  },
 });
 
 module.exports = mongoose.model('Product', Product);
