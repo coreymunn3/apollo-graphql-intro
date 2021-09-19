@@ -60,6 +60,13 @@ const typeDefs = gql`
       categoryName: String!
       slug: String!
     ): Category!
+
+    updateCategory(
+      id: ID!
+      image: String
+      categoryName: String
+      slug: String
+    ): Category!
   }
 `;
 

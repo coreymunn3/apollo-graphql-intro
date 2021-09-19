@@ -48,6 +48,12 @@ const resolvers = {
       await category.save();
       return category;
     },
+    updateCategory: async (_, { id, ...args }, { Category }) => {
+      const newCategory = await Category.findByIdAndUpdate(id, args, {
+        new: true,
+      });
+      return newCategory;
+    },
   },
 };
 
