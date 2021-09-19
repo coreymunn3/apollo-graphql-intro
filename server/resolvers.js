@@ -37,6 +37,12 @@ const resolvers = {
       await product.save();
       return product;
     },
+    updateProduct: async (_, { id, ...args }, { Product }) => {
+      const newProduct = await Product.findByIdAndUpdate(id, args, {
+        new: true,
+      });
+      return newProduct;
+    },
     createCategory: async (_, args, { Category }) => {
       const category = new Category(args);
       await category.save();

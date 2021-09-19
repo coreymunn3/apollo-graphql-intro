@@ -42,6 +42,19 @@ const typeDefs = gql`
       category: ID!
     ): Product!
 
+    updateProduct(
+      id: ID!
+      name: String
+      slug: String
+      image: String
+      rating: Float
+      price: Float
+      description: [String]
+      stock: Int
+      onSale: Boolean
+      category: ID
+    ): Product!
+
     createCategory(
       image: String!
       categoryName: String!
