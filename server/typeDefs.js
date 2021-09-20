@@ -55,6 +55,8 @@ const typeDefs = gql`
       category: ID
     ): Product!
 
+    deleteProduct(id: ID!): Boolean
+
     createCategory(
       image: String!
       categoryName: String!
@@ -67,6 +69,8 @@ const typeDefs = gql`
       categoryName: String
       slug: String
     ): Category!
+
+    deleteCategory(id: ID!): Boolean
   }
 `;
 

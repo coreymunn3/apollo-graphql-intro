@@ -43,6 +43,10 @@ const resolvers = {
       });
       return newProduct;
     },
+    deleteProduct: async (_, { id }, { Product }) => {
+      await Product.findByIdAndDelete(id);
+      return true;
+    },
     createCategory: async (_, args, { Category }) => {
       const category = new Category(args);
       await category.save();
@@ -53,6 +57,17 @@ const resolvers = {
         new: true,
       });
       return newCategory;
+    },
+    deleteCategory: async (_, { id }, { Product, Category }) => {
+      // delete all products in category first
+      const productsInCategory = await Product.find({ category: id });
+      productsInCategory.forEach(async (product) => {
+        await Product.findByIdAndDelete(product._id);
+        return;
+      });
+      // then delete category
+      await Category.findByIdAndDelete(id);
+      return true;
     },
   },
 };
