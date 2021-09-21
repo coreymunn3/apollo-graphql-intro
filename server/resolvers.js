@@ -16,6 +16,10 @@ const resolvers = {
       const category = await Category.findOne({ slug });
       return category;
     },
+    hero: async (_, __, { Hero }) => {
+      const hero = await Hero.find();
+      return hero[0];
+    },
   },
   Category: {
     products: async (parent, args, { Product }) => {
@@ -68,6 +72,11 @@ const resolvers = {
       // then delete category
       await Category.findByIdAndDelete(id);
       return true;
+    },
+    createHero: async (_, args, { Hero }) => {
+      const hero = new Hero(args);
+      await hero.save();
+      return hero;
     },
   },
 };

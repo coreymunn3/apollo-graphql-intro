@@ -1,13 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const queries = {
-  vehicles: gql`
+  hero: gql`
     query {
-      category(slug: "vehicles") {
-        products {
-          name
-          image
-        }
+      hero {
+        text
+        image
       }
     }
   `,

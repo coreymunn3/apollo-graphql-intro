@@ -22,11 +22,17 @@ const typeDefs = gql`
     products: [Product]!
   }
 
+  type Hero {
+    text: String!
+    image: String!
+  }
+
   type Query {
     products: [Product!]!
     product(slug: String!): Product
     categories: [Category!]!
     category(slug: String!): Category
+    hero: Hero
   }
 
   type Mutation {
@@ -71,6 +77,8 @@ const typeDefs = gql`
     ): Category!
 
     deleteCategory(id: ID!): Boolean
+
+    createHero(text: String!, image: String!): Hero!
   }
 `;
 

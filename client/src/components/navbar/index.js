@@ -9,7 +9,11 @@ import {
   InputRightElement,
 } from '@chakra-ui/input';
 import { Select } from '@chakra-ui/select';
-import { AiOutlineAmazon, AiOutlineSearch } from 'react-icons/ai';
+import {
+  AiOutlineAmazon,
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+} from 'react-icons/ai';
 
 const Navbar = () => {
   const location = useLocation();
@@ -66,6 +70,12 @@ const Navbar = () => {
                 <Button>Back To Store</Button>
               </RouterLink>
             )}
+            <RouterLink to='/cart'>
+              <Button variant='text' color='white'>
+                <AiOutlineShoppingCart size='2rem' />
+                {'0'}
+              </Button>
+            </RouterLink>
           </HStack>
         </Flex>
       </Container>
