@@ -9,4 +9,12 @@ export const queries = {
       }
     }
   `,
+  mainCards: gql`
+    query {
+      mainCards {
+        title
+        images
+      }
+    }
+  `,
 };

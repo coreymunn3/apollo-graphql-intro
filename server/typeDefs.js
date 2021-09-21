@@ -27,12 +27,18 @@ const typeDefs = gql`
     image: String!
   }
 
+  type MainCard {
+    title: String!
+    images: [String!]!
+  }
+
   type Query {
     products: [Product!]!
     product(slug: String!): Product
     categories: [Category!]!
     category(slug: String!): Category
     hero: Hero
+    mainCards: [MainCard!]!
   }
 
   type Mutation {
@@ -80,6 +86,8 @@ const typeDefs = gql`
 
     createHero(text: String!, image: String!): Hero!
     updateHero(id: ID!, text: String, image: String): Hero!
+
+    createMainCard(title: String!, images: [String!]!): MainCard!
   }
 `;
 

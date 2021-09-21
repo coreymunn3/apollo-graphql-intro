@@ -2,7 +2,7 @@ const { ApolloServer, gql } = require('apollo-server');
 const mongoose = require('mongoose');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
-const { Product, Category, Hero } = require('./models');
+const { Product, Category, Hero, MainCard } = require('./models');
 
 const startServer = async () => {
   const server = new ApolloServer({
@@ -12,6 +12,7 @@ const startServer = async () => {
       Product,
       Category,
       Hero,
+      MainCard,
     },
   });
 

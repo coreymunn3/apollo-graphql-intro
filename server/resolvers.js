@@ -20,6 +20,10 @@ const resolvers = {
       const hero = await Hero.find();
       return hero[0];
     },
+    mainCards: async (_, __, { MainCard }) => {
+      const maincards = await MainCard.find();
+      return maincards;
+    },
   },
   Category: {
     products: async (parent, args, { Product }) => {
@@ -83,6 +87,11 @@ const resolvers = {
         new: true,
       });
       return newHero;
+    },
+    createMainCard: async (_, args, { MainCard }) => {
+      const mainCard = new MainCard(args);
+      await mainCard.save();
+      return mainCard;
     },
   },
 };
