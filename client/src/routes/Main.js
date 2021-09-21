@@ -16,7 +16,7 @@ const Main = () => {
           {loading && <Spinner size='xl' />}
           {!loading && (
             <Fragment>
-              <Heading w='250px' color='white'>
+              <Heading w='250px' color='white' mr={4}>
                 {data.hero.text}
               </Heading>
               <Image

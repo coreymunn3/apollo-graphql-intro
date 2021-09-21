@@ -79,6 +79,7 @@ const typeDefs = gql`
     deleteCategory(id: ID!): Boolean
 
     createHero(text: String!, image: String!): Hero!
+    updateHero(id: ID!, text: String, image: String): Hero!
   }
 `;
 

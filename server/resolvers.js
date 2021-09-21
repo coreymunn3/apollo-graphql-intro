@@ -78,6 +78,12 @@ const resolvers = {
       await hero.save();
       return hero;
     },
+    updateHero: async (_, { id, ...args }, { Hero }) => {
+      const newHero = await Hero.findByIdAndUpdate(id, args, {
+        new: true,
+      });
+      return newHero;
+    },
   },
 };
 
