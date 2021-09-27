@@ -7,13 +7,7 @@ const CategoryCard = ({ category }) => {
   console.log(category);
   return (
     <Stack bgColor='white'>
-      <Heading
-        mb={2}
-        size='md'
-        textAlign='center'
-        color='blue.700'
-        _hover={{ textDecoration: 'underline' }}
-      >
+      <Heading variant='link' textAlign='center'>
         <Link to={'/category/' + category.slug}>{category.categoryName}</Link>
         <Box p={4}>
           <Image src={category.image} height='200px' objectFit='cover' />

@@ -8,7 +8,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path='/admin' component={Admin} />
-        <Route path='/category/*' component={Category} />
+        <Route exact path='/category/*' component={Category} />
         <Route path='/' component={Main} />
       </Switch>
     </BrowserRouter>
