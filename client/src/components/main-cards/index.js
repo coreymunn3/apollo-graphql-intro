@@ -18,7 +18,11 @@ const MainCards = () => {
       <Container1000>
         <SimpleGrid columns={[1, 3]} spacing={2} gridAutoRows='1fr'>
           {data.mainCards.map((card) => (
-            <MainCard title={card.title} images={card.images} />
+            <MainCard
+              title={card.title}
+              images={card.images}
+              key={card.title}
+            />
           ))}
         </SimpleGrid>
       </Container1000>

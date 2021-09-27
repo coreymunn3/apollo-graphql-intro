@@ -34,7 +34,7 @@ const Navbar = () => {
 
             {/* search bar */}
             <InputGroup maxW='500px'>
-              <InputLeftElement w='6rem'>
+              <InputLeftElement w='10rem'>
                 <Select
                   variant='filled'
                   placeholder='All'

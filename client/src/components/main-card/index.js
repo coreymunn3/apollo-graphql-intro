@@ -11,7 +11,7 @@ const MainCard = (props) => {
         </Heading>
         <SimpleGrid columns={2} spacing={2}>
           {images.map((image) => (
-            <Box>
+            <Box key={image}>
               <Image src={image} objectFit='cover' w='120px' h='120px' />
             </Box>
           ))}
