@@ -13,7 +13,7 @@ const CategoryList = () => {
     return <Loading />;
   }
   return (
-    <Box bgColor='gray.100'>
+    <Box bgColor='gray.100' py={4}>
       <Container1000>
         <Heading mb={2} size='lg' color='blue.700'>
           Browse by Category

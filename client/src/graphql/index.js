@@ -27,4 +27,11 @@ export const queries = {
       }
     }
   `,
+  categoryNames: gql`
+    query {
+      categories {
+        categoryName
+      }
+    }
+  `,
 };

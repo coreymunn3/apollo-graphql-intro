@@ -5,11 +5,11 @@ import CategoryList from '../components/category-list';
 
 const Main = () => {
   return (
-    <div>
+    <Fragment>
       <Hero />
       <MainCards />
       <CategoryList />
-    </div>
+    </Fragment>
   );
 };
 

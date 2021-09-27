@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation, Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { queries } from '../../graphql';
 import { Box, Container, Flex, HStack } from '@chakra-ui/layout';
 import { Button, IconButton } from '@chakra-ui/button';
 import {
@@ -17,14 +19,17 @@ import {
 
 const Navbar = () => {
   const location = useLocation();
-  console.log(location);
+  const { data, loading, error } = useQuery(queries.categoryNames);
+
   return (
     <Box bgColor='blue.900'>
       <Container maxW='1000px'>
         <Flex direction='row' padding={2}>
           <Box flex={1} d='flex' alignItems='center'>
             <Box mr={6}>
-              <AiOutlineAmazon size={'2rem'} color='white' />
+              <Link to='/'>
+                <AiOutlineAmazon size={'2rem'} color='white' />
+              </Link>
             </Box>
 
             {/* search bar */}
@@ -37,8 +42,12 @@ const Navbar = () => {
                   borderTopRightRadius={0}
                   borderBottomRightRadius={0}
                 >
-                  <option value={'cat 1'}>Cat 1</option>
-                  <option value={'cat 2'}>Cat 2</option>
+                  {data &&
+                    data.categories.map((cat) => (
+                      <option value={cat.categoryName}>
+                        {cat.categoryName}
+                      </option>
+                    ))}
                 </Select>
               </InputLeftElement>
               <Input
