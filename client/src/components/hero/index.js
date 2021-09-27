@@ -8,28 +8,37 @@ import {
   Heading,
   Spinner,
   Image,
+  useMediaQuery,
 } from '@chakra-ui/react';
 
 const Hero = () => {
   const { loading, error, data } = useQuery(queries.hero);
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   console.log(data);
   return (
-    <Box bgColor='blue.100' py={4}>
+    <Box bgColor='blue.100' py={[2, 4]}>
       <Container maxW='1000px'>
         {/* Main Hero Section */}
         <Flex justifyContent='center' alignItems='center' minH='200px'>
           {loading && <Spinner size='xl' />}
           {!loading && (
             <Fragment>
-              <Heading w='40%' color='blue.800' textAlign='center' mr={4}>
+              <Heading
+                w={['100%', '40%']}
+                color='blue.800'
+                textAlign='center'
+                mr={[0, 4]}
+              >
                 {data.hero.text}
               </Heading>
-              <Image
-                w='250px'
-                h='250px'
-                objectFit='contain'
-                src={data.hero.image}
-              />
+              {isLargerThan768 && (
+                <Image
+                  w='250px'
+                  h='250px'
+                  objectFit='contain'
+                  src={data.hero.image}
+                />
+              )}
             </Fragment>
           )}
         </Flex>

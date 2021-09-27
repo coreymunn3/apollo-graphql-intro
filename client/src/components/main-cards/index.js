@@ -23,13 +23,11 @@ const MainCards = () => {
   return (
     <Box bg='linear-gradient(rgb(190, 227, 248), #fff)' py={4}>
       <Container maxW='1000px'>
-        <Flex justifyContent='center'>
-          <SimpleGrid columns={3} spacing={2}>
-            {data.mainCards.map((card) => (
-              <MainCard title={card.title} images={card.images} />
-            ))}
-          </SimpleGrid>
-        </Flex>
+        <SimpleGrid columns={[1, 3]} spacing={2} gridAutoRows='1fr'>
+          {data.mainCards.map((card) => (
+            <MainCard title={card.title} images={card.images} />
+          ))}
+        </SimpleGrid>
       </Container>
     </Box>
   );
