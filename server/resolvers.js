@@ -83,15 +83,25 @@ const resolvers = {
       return hero;
     },
     updateHero: async (_, { id, ...args }, { Hero }) => {
-      const newHero = await Hero.findByIdAndUpdate(id, args, {
+      const updatedHero = await Hero.findByIdAndUpdate(id, args, {
         new: true,
       });
-      return newHero;
+      return updatedHero;
     },
     createMainCard: async (_, args, { MainCard }) => {
       const mainCard = new MainCard(args);
       await mainCard.save();
       return mainCard;
+    },
+    updateMainCard: async (_, { id, ...args }, { MainCard }) => {
+      const updatedCard = MainCard.findByIdAndUpdate(id, args, {
+        new: true,
+      });
+      return updatedCard;
+    },
+    deleteMainCard: async (_, { id }, { MainCard }) => {
+      await MainCard.findByIdAndDelete(id);
+      return true;
     },
   },
 };

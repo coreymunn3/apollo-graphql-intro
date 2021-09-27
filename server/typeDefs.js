@@ -23,11 +23,13 @@ const typeDefs = gql`
   }
 
   type Hero {
+    id: ID!
     text: String!
     image: String!
   }
 
   type MainCard {
+    id: ID!
     title: String!
     images: [String!]!
   }
@@ -88,6 +90,8 @@ const typeDefs = gql`
     updateHero(id: ID!, text: String, image: String): Hero!
 
     createMainCard(title: String!, images: [String!]!): MainCard!
+    updateMainCard(id: ID!, title: String, images: [String]): MainCard!
+    deleteMainCard(id: ID!): Boolean
   }
 `;
 
