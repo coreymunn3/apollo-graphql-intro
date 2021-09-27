@@ -1,24 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { queries } from '../../graphql';
-import { Box, SimpleGrid, Spinner } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
 import MainCard from '../main-card';
 import Container1000 from '../globals/Container';
+import Loading from '../loading';
 
 const MainCards = () => {
   const { loading, error, data } = useQuery(queries.mainCards);
 
   if (loading) {
-    return (
-      <Box
-        w='100%'
-        h='200px'
-        bg='linear-gradient(rgb(190, 227, 248), #EDF2F7)'
-        py={4}
-      >
-        <Spinner size='xl' />
-      </Box>
-    );
+    return <Loading />;
   }
 
   return (
