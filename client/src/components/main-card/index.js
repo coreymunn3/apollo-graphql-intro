@@ -4,9 +4,9 @@ import { Box, Stack, Heading, SimpleGrid, Image } from '@chakra-ui/react';
 const MainCard = (props) => {
   const { title, images } = props;
   return (
-    <Box p={2} h='100%'>
+    <Box p={2} h='100%' bgColor='white'>
       <Stack>
-        <Heading mb={2} size='lg' textAlign='center' color='white'>
+        <Heading mb={2} size='md' textAlign='center' color='blue.700'>
           {title}
         </Heading>
         <SimpleGrid columns={2} spacing={2}>

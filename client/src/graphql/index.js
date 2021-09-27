@@ -17,4 +17,14 @@ export const queries = {
       }
     }
   `,
+  categories: gql`
+    query {
+      categories {
+        id
+        categoryName
+        slug
+        image
+      }
+    }
+  `,
 };
