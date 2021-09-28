@@ -53,4 +53,22 @@ export const queries = {
       }
     }
   `,
+  productBySlug: gql`
+    query ($productSlug: String!) {
+      product(slug: $productSlug) {
+        id
+        name
+        image
+        description
+        price
+        onSale
+        rating
+        stock
+        category {
+          categoryName
+          slug
+        }
+      }
+    }
+  `,
 };

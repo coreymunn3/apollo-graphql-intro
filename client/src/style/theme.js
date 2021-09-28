@@ -20,6 +20,23 @@ const customTheme = extendTheme({
         margin: 'none',
       },
     },
+    Link: {
+      baseStyle: {
+        color: 'blue.300',
+      },
+    },
+    Button: {
+      variants: {
+        buyNow: {
+          bgColor: 'yellow.300',
+          _hover: {
+            bgColor: 'yellow.400',
+          },
+          shadow: 'md',
+          borderRadius: '20px',
+        },
+      },
+    },
   },
 });
 

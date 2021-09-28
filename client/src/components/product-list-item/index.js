@@ -19,7 +19,7 @@ const ProductListItem = ({ product }) => {
             src={image}
             width='100%'
             height='200px'
-            mr={4}
+            mb={4}
             objectFit='cover'
           />
           <Box flex={1}>

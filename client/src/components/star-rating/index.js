@@ -1,5 +1,6 @@
 import { Flex } from '@chakra-ui/layout';
 import { MdStar, MdStarHalf, MdStarBorder } from 'react-icons/md';
+import { IconContext } from 'react-icons/lib';
 
 const StarRating = ({ rating }) => {
   const starTexts = [];
@@ -20,13 +21,15 @@ const StarRating = ({ rating }) => {
   }
 
   return (
-    <Flex _hover={{ cursor: 'pointer' }}>
-      {starTexts.map((s) => {
-        if (s === 'full') return <MdStar />;
-        if (s === 'half') return <MdStarHalf />;
-        if (s === 'empty') return <MdStarBorder />;
-      })}
-    </Flex>
+    <IconContext.Provider value={{ color: '#ecc94b' }}>
+      <Flex _hover={{ cursor: 'pointer' }}>
+        {starTexts.map((s) => {
+          if (s === 'full') return <MdStar />;
+          if (s === 'half') return <MdStarHalf />;
+          if (s === 'empty') return <MdStarBorder />;
+        })}
+      </Flex>
+    </IconContext.Provider>
   );
 };
 
