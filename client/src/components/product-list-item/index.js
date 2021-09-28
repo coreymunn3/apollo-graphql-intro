@@ -1,5 +1,5 @@
 import { Flex, Box, Stack, Heading, Text, Divider } from '@chakra-ui/layout';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Image } from '@chakra-ui/image';
 import { formatter } from '../../utils';
 import { Fragment } from 'react';
@@ -8,24 +8,23 @@ import { IconContext } from 'react-icons';
 import { FaCheck } from 'react-icons/fa';
 
 const ProductListItem = ({ product }) => {
-  const location = useLocation();
   const { id, slug, image, name, onSale, price, rating } = product;
   let deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + 2);
   return (
     <Fragment>
       <IconContext.Provider value={{ color: '#ecc94b' }}>
-        <Flex direction={['column', 'row']}>
+        <Flex direction={'column'}>
           <Image
             src={image}
-            width={['100%', '200px']}
-            height={'150px'}
+            width='100%'
+            height='200px'
             mr={4}
             objectFit='cover'
           />
           <Box flex={1}>
             <Heading variant='link'>
-              <Link to={`${location.pathname}/${slug}`}>{name}</Link>
+              <Link to={`/products/${slug}`}>{name}</Link>
             </Heading>
             <StarRating rating={rating} />
             <Box mb={2}>
@@ -39,20 +38,26 @@ const ProductListItem = ({ product }) => {
                 </Text>
               )}
             </Box>
-            <Flex alignItems='center'>
-              <FaCheck color='' />
+            <Flex alignItems='flex-start'>
+              <FaCheck />
               <Text fontWeight='bold' color='blue.300'>
                 prime
               </Text>
               &nbsp;
-              <Text>{`Get it as soon as ${deliveryDate.toLocaleDateString()}`}</Text>
+              <Text color='gray.400'>
+                {' '}
+                {`Get it as soon as ${deliveryDate.toLocaleDateString('en-US', {
+                  weekday: 'short',
+                  day: 'numeric',
+                  month: 'short',
+                })}`}
+              </Text>
             </Flex>
-            <Text marginTop='none' color='gray.300'>
+            <Text marginTop='none' color='gray.400'>
               <strong>Free</strong> shipping by Amazon!
             </Text>
           </Box>
         </Flex>
-        <Divider />
       </IconContext.Provider>
     </Fragment>
   );

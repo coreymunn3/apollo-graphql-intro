@@ -1,4 +1,4 @@
-import { Box, Heading, Stack } from '@chakra-ui/layout';
+import { Box, Heading, Stack, SimpleGrid } from '@chakra-ui/layout';
 import { useQuery } from '@apollo/client';
 import { queries } from '../graphql';
 import Container1000 from '../components/globals/Container';
@@ -22,11 +22,11 @@ const Category = (props) => {
     <Box py={4}>
       <Container1000>
         <Heading mb={2} color='blue.700'>{`Browse ${urlSlug}`}</Heading>
-        <Stack>
+        <SimpleGrid columns={[1, 2, 3]} spacing={4}>
           {data.category.products.map((prod) => (
             <ProductListItem product={prod} key={prod.id} />
           ))}
-        </Stack>
+        </SimpleGrid>
       </Container1000>
     </Box>
   );
