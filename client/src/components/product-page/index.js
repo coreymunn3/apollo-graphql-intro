@@ -12,7 +12,7 @@ import {
 import { Image } from '@chakra-ui/image';
 import { Button } from '@chakra-ui/button';
 import StarRating from '../star-rating';
-import { formatter } from '../../utils';
+import PriceDisplay from '../price-display';
 
 const ProductPage = ({ product }) => {
   const {
@@ -23,11 +23,11 @@ const ProductPage = ({ product }) => {
     image,
     onSale,
     price,
+    salePrice,
     rating,
     stock,
   } = product;
 
-  const formattedPrice = formatter.format(price);
   let deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + 2);
 
@@ -40,7 +40,7 @@ const ProductPage = ({ product }) => {
         <Box w={'60%'} mx={4}>
           <Heading size='md'>{name}</Heading>
           <StarRating rating={rating} />
-          <Text fontSize='md'>{formattedPrice}</Text>
+          <PriceDisplay price={price} onSale={onSale} salePrice={salePrice} />
           <Divider />
           <Box my={4}>
             <Heading size='sm'>About This Item</Heading>
@@ -59,7 +59,11 @@ const ProductPage = ({ product }) => {
             p={4}
           >
             <Heading size='md' color='red.500'>
-              {formattedPrice}
+              <PriceDisplay
+                price={price}
+                onSale={onSale}
+                salePrice={salePrice}
+              />
             </Heading>
             <Text>
               Get <strong>Fast, Free Shipping</strong> with{' '}

@@ -1,9 +1,9 @@
 import { Flex, Box, Stack, Heading, Text, Divider } from '@chakra-ui/layout';
 import { Link } from 'react-router-dom';
 import { Image } from '@chakra-ui/image';
-import { formatter } from '../../utils';
 import { Fragment } from 'react';
 import StarRating from '../star-rating';
+import PriceDisplay from '../price-display';
 import { IconContext } from 'react-icons';
 import { FaCheck } from 'react-icons/fa';
 
@@ -27,17 +27,7 @@ const ProductListItem = ({ product }) => {
               <Link to={`/products/${slug}`}>{name}</Link>
             </Heading>
             <StarRating rating={rating} />
-            <Box mb={2}>
-              <Text fontSize='lg' fontWeight='bold' as='span'>
-                {formatter.format(price)}
-              </Text>
-              &nbsp;
-              {onSale && (
-                <Text as='span' textDecor='line-through' color='gray.300'>
-                  {formatter.format(parseFloat(salePrice))}
-                </Text>
-              )}
-            </Box>
+            <PriceDisplay price={price} onSale={onSale} salePrice={salePrice} />
             <Flex alignItems='flex-start'>
               <FaCheck />
               <Text fontWeight='bold' color='blue.300'>
