@@ -8,7 +8,7 @@ import { IconContext } from 'react-icons';
 import { FaCheck } from 'react-icons/fa';
 
 const ProductListItem = ({ product }) => {
-  const { id, slug, image, name, onSale, price, rating } = product;
+  const { id, slug, image, name, onSale, price, salePrice, rating } = product;
   let deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + 2);
   return (
@@ -34,7 +34,7 @@ const ProductListItem = ({ product }) => {
               &nbsp;
               {onSale && (
                 <Text as='span' textDecor='line-through' color='gray.300'>
-                  {formatter.format(parseFloat(price) + 50)}
+                  {formatter.format(parseFloat(salePrice))}
                 </Text>
               )}
             </Box>

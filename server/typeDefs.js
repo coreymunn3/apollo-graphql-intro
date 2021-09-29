@@ -11,6 +11,7 @@ const typeDefs = gql`
     description: [String]
     stock: Int
     onSale: Boolean
+    salePrice: Float
     category: Category!
   }
 
@@ -66,6 +67,7 @@ const typeDefs = gql`
       description: [String]
       stock: Int
       onSale: Boolean
+      salePrice: Float
       category: ID
     ): Product!
 

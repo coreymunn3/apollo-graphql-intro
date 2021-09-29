@@ -9,6 +9,7 @@ const Product = new mongoose.Schema({
   description: [String],
   stock: Number,
   onSale: Boolean,
+  salePrice: Number,
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',

@@ -49,6 +49,7 @@ export const queries = {
           price
           rating
           onSale
+          salePrice
         }
       }
     }
@@ -62,6 +63,7 @@ export const queries = {
         description
         price
         onSale
+        salePrice
         rating
         stock
         category {
