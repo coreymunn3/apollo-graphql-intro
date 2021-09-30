@@ -1,10 +1,14 @@
-import React from 'react';
+import { Box } from '@chakra-ui/layout';
+import Container1000 from '../components/globals/Container';
+import ContentOverview from '../components/content-overview';
 
 const Admin = () => {
   return (
-    <div>
-      <h1>Admin</h1>
-    </div>
+    <Box py={4}>
+      <Container1000>
+        <ContentOverview />
+      </Container1000>
+    </Box>
   );
 };
 

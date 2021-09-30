@@ -4,7 +4,7 @@ import { Stack, Box, Heading } from '@chakra-ui/layout';
 import { Image } from '@chakra-ui/image';
 
 const CategoryCard = ({ category }) => {
-  console.log(category);
+  // console.log(category);
   return (
     <Stack bgColor='white'>
       <Heading variant='link' textAlign='center'>

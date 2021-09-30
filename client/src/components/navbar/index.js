@@ -19,6 +19,7 @@ import {
 
 const Navbar = () => {
   const location = useLocation();
+  console.log(location);
   const { data, loading, error } = useQuery(queries.categoryNames);
 
   return (
@@ -33,39 +34,41 @@ const Navbar = () => {
             </Box>
 
             {/* search bar */}
-            <InputGroup maxW='500px'>
-              <InputLeftElement w='10rem'>
-                <Select
-                  variant='filled'
-                  placeholder='All'
-                  defaultValue={'All'}
-                  borderTopRightRadius={0}
-                  borderBottomRightRadius={0}
-                >
-                  {data &&
-                    data.categories.map((cat) => (
-                      <option value={cat.categoryName}>
-                        {cat.categoryName}
-                      </option>
-                    ))}
-                </Select>
-              </InputLeftElement>
-              <Input
-                pl='6.2rem'
-                bgColor='white'
-                outline='none'
-                _focus={{ outline: 'none' }}
-              />
-              <InputRightElement>
-                <IconButton
-                  borderTopLeftRadius={0}
-                  borderBottomLeftRadius={0}
-                  aria-label='search'
-                  icon={<AiOutlineSearch />}
-                  colorScheme='yellow'
+            {location.pathname !== '/admin' && (
+              <InputGroup maxW='500px'>
+                <InputLeftElement w='10rem'>
+                  <Select
+                    variant='filled'
+                    placeholder='All'
+                    defaultValue={'All'}
+                    borderTopRightRadius={0}
+                    borderBottomRightRadius={0}
+                  >
+                    {data &&
+                      data.categories.map((cat) => (
+                        <option value={cat.categoryName}>
+                          {cat.categoryName}
+                        </option>
+                      ))}
+                  </Select>
+                </InputLeftElement>
+                <Input
+                  pl='6.2rem'
+                  bgColor='white'
+                  outline='none'
+                  _focus={{ outline: 'none' }}
                 />
-              </InputRightElement>
-            </InputGroup>
+                <InputRightElement>
+                  <IconButton
+                    borderTopLeftRadius={0}
+                    borderBottomLeftRadius={0}
+                    aria-label='search'
+                    icon={<AiOutlineSearch />}
+                    colorScheme='yellow'
+                  />
+                </InputRightElement>
+              </InputGroup>
+            )}
           </Box>
           <HStack>
             {/* <Button colorScheme='yellow'>Sign In</Button> */}

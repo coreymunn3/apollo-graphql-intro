@@ -13,7 +13,7 @@ const Category = (props) => {
     },
   });
 
-  console.log(data);
+  // console.log(data);
 
   if (loading) {
     return <Loading />;

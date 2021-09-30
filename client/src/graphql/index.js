@@ -73,4 +73,14 @@ export const queries = {
       }
     }
   `,
+  productsContentTable: gql`
+    query {
+      products {
+        id
+        name
+        slug
+        stock
+      }
+    }
+  `,
 };
