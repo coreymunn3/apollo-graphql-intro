@@ -6,6 +6,8 @@ import Loading from '../loading';
 import { useQuery } from '@apollo/client';
 import { queries } from '../../graphql';
 
+const UnpaddedTabPanel = (props) => <TabPanel px={0} {...props} />;
+
 const ContentOverview = () => {
   const {
     data: productData,
@@ -28,6 +30,8 @@ const ContentOverview = () => {
           <TabList flex={1} mb={2}>
             <Tab>Categories</Tab>
             <Tab>Produst Listings</Tab>
+            <Tab>Main Cards</Tab>
+            <Tab>Hero Content</Tab>
           </TabList>
           <Button variant='solid' colorScheme='yellow' mb={2}>
             Add Content
@@ -35,20 +39,20 @@ const ContentOverview = () => {
         </Flex>
 
         <TabPanels>
-          <TabPanel px={0}>
+          <UnpaddedTabPanel>
             {categoryLoading ? (
               <Loading />
             ) : (
               <ContentTable contentList={categoryData.categories} />
             )}
-          </TabPanel>
-          <TabPanel px={0}>
+          </UnpaddedTabPanel>
+          <UnpaddedTabPanel>
             {productLoading ? (
               <Loading />
             ) : (
               <ContentTable contentList={productData.products} />
             )}
-          </TabPanel>
+          </UnpaddedTabPanel>
         </TabPanels>
       </Tabs>
     </Box>

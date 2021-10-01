@@ -1,4 +1,7 @@
+const dateScalar = require('./dateScalar');
+
 const resolvers = {
+  Date: dateScalar,
   Query: {
     products: async (_, __, { Product }) => {
       const products = await Product.find();

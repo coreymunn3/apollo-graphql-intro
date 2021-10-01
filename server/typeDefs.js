@@ -1,11 +1,13 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
+  scalar Date
+
   type Product {
     id: ID!
     name: String!
     slug: String!
-    image: String
+    image: String!
     rating: Float
     price: Float
     description: [String]
@@ -13,6 +15,8 @@ const typeDefs = gql`
     onSale: Boolean
     salePrice: Float
     category: Category!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type Category {
@@ -21,18 +25,24 @@ const typeDefs = gql`
     categoryName: String!
     slug: String!
     products: [Product]!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type Hero {
     id: ID!
     text: String!
     image: String!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type MainCard {
     id: ID!
     title: String!
     images: [String!]!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type Query {
@@ -47,13 +57,14 @@ const typeDefs = gql`
   type Mutation {
     createProduct(
       name: String!
-      slug: String
-      image: String
+      slug: String!
+      image: String!
       rating: Float
       price: Float
       description: [String]
       stock: Int
       onSale: Boolean
+      salePrice: Float
       category: ID!
     ): Product!
 
