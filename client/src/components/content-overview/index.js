@@ -1,4 +1,5 @@
-import { Box } from '@chakra-ui/layout';
+import { Box, Flex } from '@chakra-ui/layout';
+import { Button } from '@chakra-ui/button';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/tabs';
 import ContentTable from '../content-table';
 import Loading from '../loading';
@@ -22,20 +23,26 @@ const ContentOverview = () => {
 
   return (
     <Box>
-      <Tabs variant='soft-rounded'>
-        <TabList>
-          <Tab>Categories</Tab>
-          <Tab>Produst Listings</Tab>
-        </TabList>
+      <Tabs variant='line'>
+        <Flex direction={['column-reverse', 'row']}>
+          <TabList flex={1} mb={2}>
+            <Tab>Categories</Tab>
+            <Tab>Produst Listings</Tab>
+          </TabList>
+          <Button variant='solid' colorScheme='yellow' mb={2}>
+            Add Content
+          </Button>
+        </Flex>
+
         <TabPanels>
-          <TabPanel>
+          <TabPanel px={0}>
             {categoryLoading ? (
               <Loading />
             ) : (
               <ContentTable contentList={categoryData.categories} />
             )}
           </TabPanel>
-          <TabPanel>
+          <TabPanel px={0}>
             {productLoading ? (
               <Loading />
             ) : (
