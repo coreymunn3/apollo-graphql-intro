@@ -21,7 +21,7 @@ const resolvers = {
     },
     hero: async (_, __, { Hero }) => {
       const hero = await Hero.find();
-      return hero[0];
+      return hero;
     },
     mainCards: async (_, __, { MainCard }) => {
       const maincards = await MainCard.find();

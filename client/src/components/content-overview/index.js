@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/layout';
+import { Box, Flex, Spacer } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/tabs';
 import ContentTable from '../content-table';
@@ -21,18 +21,31 @@ const ContentOverview = () => {
     error: categoryError,
   } = useQuery(queries.categoriesContentTable);
 
-  console.log(categoryData);
+  const {
+    data: mainCardData,
+    loading: mainCardLoading,
+    error: mainCardError,
+  } = useQuery(queries.mainCardsContentTable);
+
+  const {
+    data: heroData,
+    loading: heroLoading,
+    error: heroError,
+  } = useQuery(queries.hero);
+
+  console.log(heroData);
 
   return (
     <Box>
       <Tabs variant='line'>
         <Flex direction={['column-reverse', 'row']}>
-          <TabList flex={1} mb={2}>
+          <TabList mb={2}>
             <Tab>Categories</Tab>
             <Tab>Produst Listings</Tab>
             <Tab>Main Cards</Tab>
             <Tab>Hero Content</Tab>
           </TabList>
+          <Spacer />
           <Button variant='solid' colorScheme='yellow' mb={2}>
             Add Content
           </Button>
@@ -51,6 +64,20 @@ const ContentOverview = () => {
               <Loading />
             ) : (
               <ContentTable contentList={productData.products} />
+            )}
+          </UnpaddedTabPanel>
+          <UnpaddedTabPanel>
+            {mainCardLoading ? (
+              <Loading />
+            ) : (
+              <ContentTable contentList={mainCardData.mainCards} />
+            )}
+          </UnpaddedTabPanel>
+          <UnpaddedTabPanel>
+            {heroLoading ? (
+              <Loading />
+            ) : (
+              <ContentTable contentList={heroData.hero} />
             )}
           </UnpaddedTabPanel>
         </TabPanels>

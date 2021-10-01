@@ -4,8 +4,11 @@ export const queries = {
   hero: gql`
     query {
       hero {
+        id
         text
         image
+        createdAt
+        updatedAt
       }
     }
   `,
@@ -88,6 +91,16 @@ export const queries = {
       categories {
         id
         categoryName
+        createdAt
+        updatedAt
+      }
+    }
+  `,
+  mainCardsContentTable: gql`
+    query {
+      mainCards {
+        id
+        title
         createdAt
         updatedAt
       }

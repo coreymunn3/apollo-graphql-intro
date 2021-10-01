@@ -50,7 +50,7 @@ const typeDefs = gql`
     product(slug: String!): Product
     categories: [Category!]!
     category(slug: String!): Category
-    hero: Hero
+    hero: [Hero!]!
     mainCards: [MainCard!]!
   }
 

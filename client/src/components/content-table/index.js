@@ -34,34 +34,49 @@ const ContentTable = ({ contentList }) => {
 
   return (
     <Table variant='simple'>
-      <Thead bgColor='gray.100'>
+      <Thead bgColor='blue.100'>
         <Tr>
           <Th>
             <Checkbox
               size='lg'
+              borderColor='gray.400'
               colorScheme='yellow'
               isChecked={allChecked}
               onChange={toggleCheckAll}
             />
           </Th>
-          <Th>Name</Th>
+          <Th>Name/Title</Th>
           <Th>Created</Th>
           <Th>Last Updated</Th>
         </Tr>
       </Thead>
       <Tbody>
         {contentList.map((content) => (
-          <Tr key={content.id}>
+          <Tr
+            key={content.id}
+            color='gray.600'
+            _hover={{
+              bgColor: 'gray.100',
+              color: 'gray.900',
+              cursor: 'pointer',
+            }}
+          >
             <Td>
               <Checkbox
                 id={content.id}
+                borderColor='gray.300'
                 size='lg'
                 colorScheme='yellow'
                 isChecked={checkedItems[content.id]}
                 onChange={handleCheck}
               />
             </Td>
-            <Td>{content.name || content.categoryName}</Td>
+            <Td>
+              {content.name ||
+                content.categoryName ||
+                content.text ||
+                content.title}
+            </Td>
             <Td>
               {new Date(content.createdAt).toLocaleDateString('em-US', {
                 year: 'numeric',

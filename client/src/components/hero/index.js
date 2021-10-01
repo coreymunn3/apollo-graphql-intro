@@ -29,14 +29,14 @@ const Hero = () => {
                 textAlign='center'
                 mr={[0, 4]}
               >
-                {data.hero.text}
+                {data.hero[0].text}
               </Heading>
               {isLargerThan768 && (
                 <Image
                   w='250px'
                   h='250px'
                   objectFit='contain'
-                  src={data.hero.image}
+                  src={data.hero[0].image}
                 />
               )}
             </Fragment>
