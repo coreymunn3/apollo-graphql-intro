@@ -19,7 +19,7 @@ const ContentOverview = () => {
     data: categoryData,
     loading: categoryLoading,
     error: categoryError,
-  } = useQuery(queries.categories);
+  } = useQuery(queries.categoriesContentTable);
 
   console.log(categoryData);
 

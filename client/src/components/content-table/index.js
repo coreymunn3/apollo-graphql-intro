@@ -45,7 +45,8 @@ const ContentTable = ({ contentList }) => {
             />
           </Th>
           <Th>Name</Th>
-          <Th>Slug</Th>
+          <Th>Created</Th>
+          <Th>Last Updated</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -61,7 +62,26 @@ const ContentTable = ({ contentList }) => {
               />
             </Td>
             <Td>{content.name || content.categoryName}</Td>
-            <Td>{content.slug}</Td>
+            <Td>
+              {new Date(content.createdAt).toLocaleDateString('em-US', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
+              })}
+            </Td>
+            <Td>
+              {new Date(content.updatedAt).toLocaleDateString('em-US', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
+              })}
+            </Td>
           </Tr>
         ))}
       </Tbody>

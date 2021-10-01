@@ -78,8 +78,18 @@ export const queries = {
       products {
         id
         name
-        slug
-        stock
+        createdAt
+        updatedAt
+      }
+    }
+  `,
+  categoriesContentTable: gql`
+    query {
+      categories {
+        id
+        categoryName
+        createdAt
+        updatedAt
       }
     }
   `,
