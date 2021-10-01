@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { Checkbox } from '@chakra-ui/checkbox';
+import { Flex, Text } from '@chakra-ui/layout';
+import TableActionRow from './table-action-row';
 
 const ContentTable = ({ contentList }) => {
   const allBoxesChecked = contentList.reduce(
@@ -32,75 +34,91 @@ const ContentTable = ({ contentList }) => {
     }
   };
 
+  const atLeastOneRowSelected = Object.keys(checkedItems).some(
+    (key) => checkedItems[key]
+  );
+  const numRowsSelected = Object.keys(checkedItems).filter(
+    (key) => checkedItems[key]
+  ).length;
+
   return (
-    <Table variant='simple'>
-      <Thead bgColor='blue.100'>
-        <Tr>
-          <Th>
-            <Checkbox
-              size='lg'
-              borderColor='gray.400'
-              colorScheme='yellow'
-              isChecked={allChecked}
-              onChange={toggleCheckAll}
-            />
-          </Th>
-          <Th>Name/Title</Th>
-          <Th>Created</Th>
-          <Th>Last Updated</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {contentList.map((content) => (
-          <Tr
-            key={content.id}
-            color='gray.600'
-            _hover={{
-              bgColor: 'gray.100',
-              color: 'gray.900',
-              cursor: 'pointer',
-            }}
-          >
-            <Td>
+    <Fragment>
+      <Text color='gray.400' mb={1}>
+        {contentList.length} items found
+      </Text>
+      <Table variant='simple'>
+        <Thead bgColor='blue.100'>
+          <Tr>
+            <Th>
               <Checkbox
-                id={content.id}
-                borderColor='gray.300'
                 size='lg'
-                colorScheme='yellow'
-                isChecked={checkedItems[content.id]}
-                onChange={handleCheck}
+                borderColor='gray.400'
+                colorScheme='blue'
+                isChecked={allChecked}
+                onChange={toggleCheckAll}
               />
-            </Td>
-            <Td>
-              {content.name ||
-                content.categoryName ||
-                content.text ||
-                content.title}
-            </Td>
-            <Td>
-              {new Date(content.createdAt).toLocaleDateString('em-US', {
-                year: 'numeric',
-                month: 'long',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true,
-              })}
-            </Td>
-            <Td>
-              {new Date(content.updatedAt).toLocaleDateString('em-US', {
-                year: 'numeric',
-                month: 'long',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true,
-              })}
-            </Td>
+            </Th>
+            <Th>Name/Title</Th>
+            <Th>Created</Th>
+            <Th>Last Updated</Th>
           </Tr>
-        ))}
-      </Tbody>
-    </Table>
+          {/* Show actions row if items selected */}
+          {atLeastOneRowSelected && (
+            <TableActionRow numRowsSelected={numRowsSelected} />
+          )}
+        </Thead>
+        <Tbody>
+          {contentList.map((content) => (
+            <Tr
+              key={content.id}
+              color='gray.600'
+              _hover={{
+                bgColor: 'gray.100',
+                color: 'gray.900',
+                cursor: 'pointer',
+              }}
+            >
+              <Td>
+                <Checkbox
+                  id={content.id}
+                  borderColor='gray.300'
+                  size='lg'
+                  colorScheme='blue'
+                  isChecked={checkedItems[content.id]}
+                  onChange={handleCheck}
+                />
+              </Td>
+              <Td>
+                {content.name ||
+                  content.categoryName ||
+                  content.text ||
+                  content.title}
+              </Td>
+              <Td>
+                {new Date(content.createdAt).toLocaleDateString('em-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                })}
+              </Td>
+              <Td>
+                {new Date(content.updatedAt).toLocaleDateString('em-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                })}
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </Fragment>
   );
 };
 
