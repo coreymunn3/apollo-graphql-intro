@@ -1,7 +1,8 @@
 import { useState, Fragment } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { Checkbox } from '@chakra-ui/checkbox';
-import { Flex, Text } from '@chakra-ui/layout';
+import { Text } from '@chakra-ui/layout';
 import TableActionRow from './table-action-row';
 
 const ContentTable = ({ contentList }) => {
@@ -37,9 +38,10 @@ const ContentTable = ({ contentList }) => {
   const atLeastOneRowSelected = Object.keys(checkedItems).some(
     (key) => checkedItems[key]
   );
-  const numRowsSelected = Object.keys(checkedItems).filter(
-    (key) => checkedItems[key]
-  ).length;
+
+  const selectedRows = Object.keys(checkedItems).filter(
+    (key) => checkedItems[key] && key
+  );
 
   return (
     <Fragment>
@@ -64,7 +66,7 @@ const ContentTable = ({ contentList }) => {
           </Tr>
           {/* Show actions row if items selected */}
           {atLeastOneRowSelected && (
-            <TableActionRow numRowsSelected={numRowsSelected} />
+            <TableActionRow selectedRows={selectedRows} />
           )}
         </Thead>
         <Tbody>
@@ -89,10 +91,12 @@ const ContentTable = ({ contentList }) => {
                 />
               </Td>
               <Td>
-                {content.name ||
-                  content.categoryName ||
-                  content.text ||
-                  content.title}
+                <Link to={`/admin/${content.id}`}>
+                  {content.name ||
+                    content.categoryName ||
+                    content.text ||
+                    content.title}
+                </Link>
               </Td>
               <Td>
                 {new Date(content.createdAt).toLocaleDateString('em-US', {
