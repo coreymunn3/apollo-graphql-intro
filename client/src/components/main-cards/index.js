@@ -14,7 +14,7 @@ const MainCards = () => {
   }
 
   return (
-    <Box bg='linear-gradient(rgb(190, 227, 248), #EDF2F7)' py={4}>
+    <Box bg='linear-gradient(rgb(190, 227, 248), #EDF2F7)'>
       <Container1000>
         <SimpleGrid columns={[1, 3]} spacing={2} gridAutoRows='1fr'>
           {data.mainCards.map((card) => (

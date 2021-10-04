@@ -19,16 +19,14 @@ const Category = (props) => {
     return <Loading />;
   }
   return (
-    <Box py={4}>
-      <Container1000>
-        <Heading mb={2} color='blue.700'>{`Browse ${urlSlug}`}</Heading>
-        <SimpleGrid columns={[1, 2, 3]} spacing={4}>
-          {data.category.products.map((prod) => (
-            <ProductListItem product={prod} key={prod.id} />
-          ))}
-        </SimpleGrid>
-      </Container1000>
-    </Box>
+    <Container1000>
+      <Heading mb={2} color='blue.700'>{`Browse ${urlSlug}`}</Heading>
+      <SimpleGrid columns={[1, 2, 3]} spacing={4}>
+        {data.category.products.map((prod) => (
+          <ProductListItem product={prod} key={prod.id} />
+        ))}
+      </SimpleGrid>
+    </Container1000>
   );
 };
 

@@ -20,11 +20,9 @@ const Product = (props) => {
   }
 
   return (
-    <Box py={4}>
-      <Container1000>
-        <ProductPage product={data.product} />
-      </Container1000>
-    </Box>
+    <Container1000>
+      <ProductPage product={data.product} />
+    </Container1000>
   );
 };
 

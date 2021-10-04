@@ -4,12 +4,10 @@ import ContentOverview from '../components/content-overview';
 
 const Admin = () => {
   return (
-    <Box py={4}>
-      <Container1000>
-        {/* content search bar */}
-        <ContentOverview />
-      </Container1000>
-    </Box>
+    <Container1000>
+      {/* content search bar */}
+      <ContentOverview />
+    </Container1000>
   );
 };
 
