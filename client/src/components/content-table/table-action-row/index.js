@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 
 const TableActionRow = ({ selectedRows }) => {
   return (
-    <Tr bgColor='blue.50'>
+    <Tr bgColor='blue.50' position='sticky' top={10} zIndex='overlay'>
       <Th colSpan={4}>
         <Text
           fontWeight='normal'

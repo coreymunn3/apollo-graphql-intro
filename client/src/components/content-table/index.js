@@ -48,9 +48,9 @@ const ContentTable = ({ contentList }) => {
       <Text color='gray.400' mb={1}>
         {contentList.length} items found
       </Text>
-      <Table variant='simple'>
-        <Thead bgColor='blue.100'>
-          <Tr>
+      <Table variant='simple' position='relative'>
+        <Thead>
+          <Tr position='sticky' top={0} bgColor='blue.100' zIndex='overlay'>
             <Th>
               <Checkbox
                 size='lg'
