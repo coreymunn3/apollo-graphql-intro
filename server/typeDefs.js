@@ -52,6 +52,7 @@ const typeDefs = gql`
     category(slug: String!): Category
     hero: [Hero!]!
     mainCards: [MainCard!]!
+    mainCard(id: ID!): MainCard
   }
 
   type Mutation {

@@ -1,13 +1,25 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useParams, useLocation } from 'react-router';
 import Container1000 from '../components/globals/Container';
+import ContentForm from '../components/content-form';
+import { useQuery } from '@apollo/client';
+import { queries } from '../graphql';
 
 const ContentEdit = () => {
   const { contentId } = useParams();
-  console.log(contentId);
+  const {
+    state: { contentType },
+  } = useLocation();
+  console.log(contentType, contentId);
+
+  // run query based on content
+  // add "find by id" queries for every content type!
+
+  // const {data, loading, error } = useQuery(queries.findById(contentId))
+
   return (
     <Container1000>
-      <h1>Edit your content here</h1>
+      <ContentForm contentType={contentType} />
     </Container1000>
   );
 };

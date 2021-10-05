@@ -27,6 +27,10 @@ const resolvers = {
       const maincards = await MainCard.find();
       return maincards;
     },
+    mainCard: async (_, { id }, { MainCard }) => {
+      const maincard = await MainCard.findById(id);
+      return maincard;
+    },
   },
   Category: {
     products: async (parent, args, { Product }) => {

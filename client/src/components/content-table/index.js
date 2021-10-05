@@ -6,6 +6,7 @@ import { Text } from '@chakra-ui/layout';
 import TableActionRow from './table-action-row';
 
 const ContentTable = ({ contentList }) => {
+  console.log(contentList);
   const allBoxesChecked = contentList.reduce(
     (acc, cur) => ((acc[cur.id] = true), acc),
     {}
@@ -91,7 +92,12 @@ const ContentTable = ({ contentList }) => {
                 />
               </Td>
               <Td>
-                <Link to={`/admin/${content.id}`}>
+                <Link
+                  to={{
+                    pathname: `/admin/${content.id}`,
+                    state: { contentType: content.__typename },
+                  }}
+                >
                   {content.name ||
                     content.categoryName ||
                     content.text ||

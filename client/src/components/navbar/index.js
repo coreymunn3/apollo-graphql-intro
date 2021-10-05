@@ -34,7 +34,7 @@ const Navbar = () => {
             </Box>
 
             {/* search bar */}
-            {location.pathname !== '/admin' && (
+            {!location.pathname.includes('/admin') && (
               <InputGroup maxW='500px'>
                 <InputLeftElement w='10rem'>
                   <Select
