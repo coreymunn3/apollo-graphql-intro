@@ -35,6 +35,13 @@ const customTheme = extendTheme({
           shadow: 'md',
           borderRadius: '20px',
         },
+        'primary-dark': {
+          bgColor: 'blue.700',
+          color: 'white',
+          _hover: {
+            bgColor: 'blue.600',
+          },
+        },
       },
     },
   },

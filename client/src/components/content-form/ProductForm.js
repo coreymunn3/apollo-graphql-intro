@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Stack, Flex } from '@chakra-ui/layout';
-import { FormField, FormSelect, FormSwitch } from '../form-elements';
+import { FormField, FormSelect, FormSwitch, TypeToAdd } from '../form-elements';
 import { Button } from '@chakra-ui/button';
 import { useQuery } from '@apollo/client';
 import { queries } from '../../graphql';
@@ -26,6 +26,7 @@ const ProductForm = () => {
     name: '',
     slug: '',
     image: '',
+    description: [''],
     rating: 0,
     price: 0,
     onSale: false,
@@ -37,6 +38,7 @@ const ProductForm = () => {
     name: Yup.string().required(),
     slug: Yup.string().required(),
     image: Yup.string().required(),
+    description: Yup.array(),
     rating: Yup.number().min(0).max(5),
     price: Yup.number().required().min(0),
     stock: Yup.number().min(0),
@@ -65,6 +67,7 @@ const ProductForm = () => {
               <FormField name='name' label={'Name'} required={true} />
               <FormField name='slug' label={'Slug'} required={true} />
               <FormField name='image' label={'Image Link'} required={true} />
+              <TypeToAdd name='description' label='Description Bullet Points' />
               <FormField name='rating' label={'Product Rating (out of 5)'} />
               <FormField name='price' label={'Price'} />
               <Flex direction='row'>
@@ -81,10 +84,9 @@ const ProductForm = () => {
                 options={categoryOptions}
               />
               <Button
+                variant='primary-dark'
                 type='submit'
                 mt={4}
-                bgColor='blue.700'
-                color='white'
                 isLoading={form.isSubmitting}
               >
                 Submit

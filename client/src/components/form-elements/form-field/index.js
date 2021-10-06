@@ -15,9 +15,11 @@ const FormField = (props) => {
           isRequired={required}
           isInvalid={form.errors[name] && form.touched[name]}
         >
-          <FormLabel fontSize='sm' color='blue.700' mb={1}>
-            {label}
-          </FormLabel>
+          {label && (
+            <FormLabel fontSize='sm' color='blue.700' mb={1}>
+              {label}
+            </FormLabel>
+          )}
           <Input {...field} errorBorderColor='yellow.400' />
           <FormErrorMessage color='yellow.500'>
             {form.errors[name]}
