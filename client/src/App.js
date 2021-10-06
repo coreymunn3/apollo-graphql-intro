@@ -7,7 +7,11 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route exact path='/admin/:contentId' component={ContentEdit} />
+        <Route
+          exact
+          path='/admin/:contentType/:contentId'
+          component={ContentEdit}
+        />
         <Route exact path='/admin' component={Admin} />
         <Route exact path='/category/*' component={Category} />
         <Route exact path='/products/*' component={Product} />

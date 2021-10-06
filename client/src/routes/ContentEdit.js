@@ -6,11 +6,7 @@ import { useQuery } from '@apollo/client';
 import { queries } from '../graphql';
 
 const ContentEdit = () => {
-  const { contentId } = useParams();
-  const {
-    state: { contentType },
-  } = useLocation();
-  console.log(contentType, contentId);
+  const { contentType, contentId } = useParams();
 
   // run query based on content
   // add "find by id" queries for every content type!

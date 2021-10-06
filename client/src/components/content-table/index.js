@@ -78,7 +78,6 @@ const ContentTable = ({ contentList }) => {
               _hover={{
                 bgColor: 'gray.100',
                 color: 'gray.900',
-                cursor: 'pointer',
               }}
             >
               <Td>
@@ -94,8 +93,7 @@ const ContentTable = ({ contentList }) => {
               <Td>
                 <Link
                   to={{
-                    pathname: `/admin/${content.id}`,
-                    state: { contentType: content.__typename },
+                    pathname: `/admin/${content.__typename}/${content.id}`,
                   }}
                 >
                   {content.name ||
