@@ -10,7 +10,6 @@ const TypeToAdd = (props) => {
   return (
     <FieldArray name={name}>
       {({ form, push, remove }) => {
-        console.log(form.values);
         return (
           <Box>
             <FormLabel

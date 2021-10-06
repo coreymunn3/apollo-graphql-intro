@@ -18,7 +18,7 @@ const FormSwitch = (props) => {
           <FormLabel fontSize='sm' color='blue.700' mb={1}>
             {label}
           </FormLabel>
-          <Switch {...field} />
+          <Switch {...field} defaultChecked={form.values[name]} />
           <FormErrorMessage color='yellow.500'>
             {form.errors[name]}
           </FormErrorMessage>

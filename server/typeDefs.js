@@ -47,9 +47,9 @@ const typeDefs = gql`
 
   type Query {
     products: [Product!]!
-    product(slug: String!): Product
+    product(slug: String, id: String): Product
     categories: [Category!]!
-    category(slug: String!): Category
+    category(slug: String, id: String): Category
     hero: [Hero!]!
     mainCards: [MainCard!]!
     mainCard(id: ID!): MainCard

@@ -7,16 +7,28 @@ const resolvers = {
       const products = await Product.find();
       return products;
     },
-    product: async (parent, { slug }, { Product }) => {
-      const product = await Product.findOne({ slug });
+    product: async (parent, args, { Product }) => {
+      let product;
+      if (args?.slug) {
+        product = await Product.findOne({ slug: args.slug });
+      }
+      if (args?.id) {
+        product = await Product.findOne({ _id: args.id });
+      }
       return product;
     },
     categories: async (_, __, { Category }) => {
       const categories = await Category.find();
       return categories;
     },
-    category: async (_, { slug }, { Category }) => {
-      const category = await Category.findOne({ slug });
+    category: async (_, args, { Category }) => {
+      let category;
+      if (args?.slug) {
+        category = await Category.findOne({ slug: args.slug });
+      }
+      if (args?.id) {
+        category = await Category.findOne({ _id: args.id });
+      }
       return category;
     },
     hero: async (_, __, { Hero }) => {

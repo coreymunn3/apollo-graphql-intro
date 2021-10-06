@@ -1,28 +1,47 @@
 import { useState, useEffect } from 'react';
 import { Stack, Flex } from '@chakra-ui/layout';
 import { FormField, FormSelect, FormSwitch, TypeToAdd } from '../form-elements';
+import Loading from '../loading';
 import { Button } from '@chakra-ui/button';
 import { useQuery } from '@apollo/client';
 import { queries } from '../../graphql';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
-const ProductForm = () => {
-  const { data: categoryData, loading, error } = useQuery(queries.categories);
-  const [categoryOptions, setCategoryOptions] = useState([]);
+const ProductForm = ({ productId }) => {
+  // get categories for select field options
+  const {
+    data: catData,
+    loading: catLoading,
+    error: catError,
+  } = useQuery(queries.categories);
 
+  // get products
+  const {
+    data: prodData,
+    loading: prodLoading,
+    error: prodError,
+  } = useQuery(queries.productById, {
+    variables: {
+      productId,
+    },
+  });
+  // console.log(prodData);
+
+  // format category data
+  const [categoryOptions, setCategoryOptions] = useState([]);
   useEffect(() => {
-    if (!loading & !error) {
-      const formattedData = categoryData.categories.map((cat) => ({
+    if (!catLoading & !catError) {
+      const formattedData = catData.categories.map((cat) => ({
         id: cat.id,
         name: cat.categoryName,
       }));
       setCategoryOptions(formattedData);
-      console.log(formattedData);
     }
-  }, [categoryData]);
+  }, [catData]);
 
-  const initialState = {
+  // generate initial state
+  const emptyInitialState = {
     name: '',
     slug: '',
     image: '',
@@ -34,6 +53,21 @@ const ProductForm = () => {
     stock: 0,
     category: '',
   };
+  // format product data into initial state if exists
+  const [productInitialState, setProductInitialState] = useState({});
+  useEffect(() => {
+    if (!prodLoading && !prodError) {
+      const { category, __typename, ...other } = prodData.product;
+      setProductInitialState({
+        ...productInitialState,
+        ...other,
+        category: category.id,
+      });
+    }
+  }, [prodData, prodLoading, prodError]);
+
+  console.log(productInitialState);
+
   const productSchema = Yup.object().shape({
     name: Yup.string().required(),
     slug: Yup.string().required(),
@@ -45,12 +79,15 @@ const ProductForm = () => {
     onSale: Yup.boolean(),
     salePrice: Yup.number().min(0),
     category: Yup.string().required(),
-    // still need description
   });
 
+  if (prodLoading) {
+    return <Loading />;
+  }
   return (
     <Formik
-      initialValues={initialState}
+      initialValues={productId ? productInitialState : emptyInitialState}
+      enableReinitialize={true}
       validationSchema={productSchema}
       onSubmit={(values, actions) => {
         console.log('Submitting');
@@ -89,7 +126,7 @@ const ProductForm = () => {
                 mt={4}
                 isLoading={form.isSubmitting}
               >
-                Submit
+                {productId ? 'Update Product' : 'Submit'}
               </Button>
             </Stack>
           </Form>
@@ -98,5 +135,4 @@ const ProductForm = () => {
     </Formik>
   );
 };
-
 export default ProductForm;

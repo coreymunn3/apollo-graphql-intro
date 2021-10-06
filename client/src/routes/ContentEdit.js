@@ -1,23 +1,29 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router';
+import { Text } from '@chakra-ui/layout';
+import { useParams } from 'react-router';
 import Container1000 from '../components/globals/Container';
-import ContentForm from '../components/content-form';
-import { useQuery } from '@apollo/client';
-import { queries } from '../graphql';
+import { ProductForm } from '../components/content-form';
 
 const ContentEdit = () => {
   const { contentType, contentId } = useParams();
 
-  // run query based on content
-  // add "find by id" queries for every content type!
+  const renderBasedOnContentType = (contentType) => {
+    switch (contentType) {
+      case 'Product':
+        return <ProductForm productId={contentId} />;
 
-  // const {data, loading, error } = useQuery(queries.findById(contentId))
+      // case 'Category':
+      //   return <CategoryForm />;
+      // case 'MainCard':
+      //   return <MainCardForm />;
+      // case 'Hero':
+      //   return <HeroForm />
+      default:
+        return <Text>Oops, this content type is not supported!</Text>;
+    }
+  };
 
-  return (
-    <Container1000>
-      <ContentForm contentType={contentType} />
-    </Container1000>
-  );
+  return <Container1000>{renderBasedOnContentType(contentType)}</Container1000>;
 };
 
 export default ContentEdit;
