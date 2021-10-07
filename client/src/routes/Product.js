@@ -9,11 +9,14 @@ const Product = (props) => {
   const productSlug = props.match.params[0];
   console.log(productSlug);
 
-  const { data, loading, error } = useQuery(queries.productBySlug, {
-    variables: {
-      productSlug,
-    },
-  });
+  const { data, loading, error } = useQuery(
+    queries.productQueries.productBySlug,
+    {
+      variables: {
+        productSlug,
+      },
+    }
+  );
   console.log(data);
   if (loading) {
     return <Loading />;

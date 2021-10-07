@@ -7,7 +7,9 @@ import { useQuery } from '@apollo/client';
 import { queries } from '../../graphql';
 
 const CategoryList = () => {
-  const { data, loading, error } = useQuery(queries.categories);
+  const { data, loading, error } = useQuery(
+    queries.categoryQueries.allCategories
+  );
 
   if (loading) {
     return <Loading />;

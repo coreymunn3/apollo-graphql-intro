@@ -12,7 +12,7 @@ import {
 import { Container1000 } from '../globals/Container';
 
 const Hero = () => {
-  const { loading, error, data } = useQuery(queries.hero);
+  const { loading, error, data } = useQuery(queries.heroQueries.hero);
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   return (

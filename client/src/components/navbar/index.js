@@ -20,7 +20,9 @@ import {
 const Navbar = () => {
   const location = useLocation();
   console.log(location);
-  const { data, loading, error } = useQuery(queries.categoryNames);
+  const { data, loading, error } = useQuery(
+    queries.categoryQueries.categoryNames
+  );
 
   return (
     <Box bgColor='blue.900'>

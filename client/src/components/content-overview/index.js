@@ -13,25 +13,25 @@ const ContentOverview = () => {
     data: productData,
     loading: productLoading,
     error: productError,
-  } = useQuery(queries.productsContentTable);
+  } = useQuery(queries.productQueries.productsContentTable);
 
   const {
     data: categoryData,
     loading: categoryLoading,
     error: categoryError,
-  } = useQuery(queries.categoriesContentTable);
+  } = useQuery(queries.categoryQueries.categoriesContentTable);
 
   const {
     data: mainCardData,
     loading: mainCardLoading,
     error: mainCardError,
-  } = useQuery(queries.mainCardsContentTable);
+  } = useQuery(queries.mainCardQueries.mainCardsContentTable);
 
   const {
     data: heroData,
     loading: heroLoading,
     error: heroError,
-  } = useQuery(queries.hero);
+  } = useQuery(queries.heroQueries.hero);
 
   console.log(heroData);
 

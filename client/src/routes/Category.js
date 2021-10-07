@@ -7,11 +7,14 @@ import ProductListItem from '../components/product-list-item';
 
 const Category = (props) => {
   const urlSlug = props.match.params[0];
-  const { data, loading, error } = useQuery(queries.productsByCategory, {
-    variables: {
-      categorySlug: urlSlug,
-    },
-  });
+  const { data, loading, error } = useQuery(
+    queries.productQueries.productsByCategory,
+    {
+      variables: {
+        categorySlug: urlSlug,
+      },
+    }
+  );
 
   // console.log(data);
 

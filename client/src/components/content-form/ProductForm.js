@@ -14,14 +14,14 @@ const ProductForm = ({ productId }) => {
     data: catData,
     loading: catLoading,
     error: catError,
-  } = useQuery(queries.categories);
+  } = useQuery(queries.categoryQueries.allCategories);
 
   // get products
   const {
     data: prodData,
     loading: prodLoading,
     error: prodError,
-  } = useQuery(queries.productById, {
+  } = useQuery(queries.productQueries.productById, {
     variables: {
       productId,
     },

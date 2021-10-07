@@ -7,7 +7,9 @@ import Container1000 from '../globals/Container';
 import Loading from '../loading';
 
 const MainCards = () => {
-  const { loading, error, data } = useQuery(queries.mainCards);
+  const { loading, error, data } = useQuery(
+    queries.mainCardQueries.allMainCards
+  );
 
   if (loading) {
     return <Loading />;
