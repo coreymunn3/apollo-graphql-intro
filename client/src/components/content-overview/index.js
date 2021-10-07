@@ -1,5 +1,6 @@
 import { Box, Flex, Spacer } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
+import { Link } from 'react-router-dom';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/tabs';
 import ContentTable from '../content-table';
 import Loading from '../loading';
@@ -47,7 +48,7 @@ const ContentOverview = () => {
           </TabList>
           <Spacer />
           <Button variant='solid' colorScheme='yellow' mb={2}>
-            Add Content
+            <Link to='/admin/new-content'>Add Content</Link>
           </Button>
         </Flex>
 
