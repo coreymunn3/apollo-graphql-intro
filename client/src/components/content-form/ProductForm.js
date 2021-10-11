@@ -18,7 +18,7 @@ const ProductForm = ({ productId }) => {
     error: catError,
   } = useQuery(queries.categoryQueries.allCategories);
 
-  // get products
+  // get products info for edit
   const {
     data: prodData,
     loading: prodLoading,
@@ -46,7 +46,7 @@ const ProductForm = ({ productId }) => {
     }
   }, [catData]);
 
-  // generate initial state
+  // generate initial state (used if not updating)
   const emptyInitialState = {
     name: '',
     slug: '',
@@ -59,7 +59,7 @@ const ProductForm = ({ productId }) => {
     stock: 0,
     category: '',
   };
-  // format product data into initial state if exists
+  // format product data into initial state if exists (used when updating)
   const [productInitialState, setProductInitialState] = useState({});
   useEffect(() => {
     if (!prodLoading && !prodError) {

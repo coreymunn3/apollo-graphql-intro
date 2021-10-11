@@ -28,4 +28,14 @@ export const categoryQueries = {
       }
     }
   `,
+  categoryById: gql`
+    query ($categoryId: String) {
+      category(id: $categoryId) {
+        id
+        categoryName
+        slug
+        image
+      }
+    }
+  `,
 };

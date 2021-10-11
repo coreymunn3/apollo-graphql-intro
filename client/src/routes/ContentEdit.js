@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '@chakra-ui/layout';
 import { useParams } from 'react-router';
 import Container1000 from '../components/globals/Container';
-import { ProductForm } from '../components/content-form';
+import { ProductForm, CategoryForm } from '../components/content-form';
 
 const ContentEdit = () => {
   const { contentType, contentId } = useParams();
@@ -11,9 +11,8 @@ const ContentEdit = () => {
     switch (contentType) {
       case 'Product':
         return <ProductForm productId={contentId} />;
-
-      // case 'Category':
-      //   return <CategoryForm />;
+      case 'Category':
+        return <CategoryForm categoryId={contentId} />;
       // case 'MainCard':
       //   return <MainCardForm />;
       // case 'Hero':
