@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { Stack, Flex } from '@chakra-ui/layout';
 import { FormField, FormSelect, FormSwitch, TypeToAdd } from '../form-elements';
 import Loading from '../loading';
 import { Button } from '@chakra-ui/button';
-import { useQuery } from '@apollo/client';
-import { queries } from '../../graphql';
+import { useQuery, useMutation } from '@apollo/client';
+import { queries, mutations } from '../../graphql';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
 const ProductForm = ({ productId }) => {
+  const history = useHistory();
   // get categories for select field options
   const {
     data: catData,
@@ -26,7 +28,11 @@ const ProductForm = ({ productId }) => {
       productId,
     },
   });
-  // console.log(prodData);
+
+  // mutate products
+  const [updateProduct, updateProductResult] = useMutation(
+    mutations.productMutations.updateProduct
+  );
 
   // format category data
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -57,22 +63,22 @@ const ProductForm = ({ productId }) => {
   const [productInitialState, setProductInitialState] = useState({});
   useEffect(() => {
     if (!prodLoading && !prodError) {
-      const { category, __typename, ...other } = prodData.product;
+      const { category, salePrice, __typename, ...other } = prodData.product;
       setProductInitialState({
         ...productInitialState,
         ...other,
+        salePrice: salePrice ? salePrice : 0,
+        id: productId,
         category: category.id,
       });
     }
   }, [prodData, prodLoading, prodError]);
 
-  console.log(productInitialState);
-
   const productSchema = Yup.object().shape({
     name: Yup.string().required(),
     slug: Yup.string().required(),
     image: Yup.string().required(),
-    description: Yup.array(),
+    description: Yup.array().of(Yup.string()),
     rating: Yup.number().min(0).max(5),
     price: Yup.number().required().min(0),
     stock: Yup.number().min(0),
@@ -89,15 +95,35 @@ const ProductForm = ({ productId }) => {
       initialValues={productId ? productInitialState : emptyInitialState}
       enableReinitialize={true}
       validationSchema={productSchema}
-      onSubmit={(values, actions) => {
-        console.log('Submitting');
-        console.log(values);
+      onSubmit={async (values, actions) => {
+        console.log('submitting');
+        // if we're editing based on a product ID, we want to update the product
+        if (productId) {
+          updateProduct({
+            variables: {
+              updateProductId: values.id,
+              updateProductName: values.name,
+              updateProductSlug: values.slug,
+              updateProductImage: values.image,
+              updateProductRating: values.rating,
+              updateProductPrice: values.price,
+              updateProductDescription: values.description,
+              updateProductStock: values.stock,
+              updateProductOnSale: values.onSale,
+              updateProductSalePrice: values.salePrice,
+              updateProductCategory: values.category,
+            },
+          });
+        } else {
+          // otherwise, create a new product
+          // ToDo
+        }
         actions.setSubmitting(false);
-        return;
+        history.push('/admin');
       }}
     >
-      {({ values, ...form }) => {
-        console.log(values);
+      {(formikProps) => {
+        console.log(formikProps);
         return (
           <Form>
             <Stack maxW='500px' margin='auto' spacing={2}>
@@ -109,7 +135,7 @@ const ProductForm = ({ productId }) => {
               <FormField name='price' label={'Price'} />
               <Flex direction='row'>
                 <FormSwitch name='onSale' label={'On Sale?'} />
-                {values.onSale && (
+                {formikProps.values.onSale && (
                   <FormField name='salePrice' label={'Sale Price'} />
                 )}
               </Flex>
@@ -124,7 +150,7 @@ const ProductForm = ({ productId }) => {
                 variant='primary-dark'
                 type='submit'
                 mt={4}
-                isLoading={form.isSubmitting}
+                isLoading={formikProps.isSubmitting}
               >
                 {productId ? 'Update Product' : 'Submit'}
               </Button>
